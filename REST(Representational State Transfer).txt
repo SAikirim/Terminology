@@ -1,0 +1,8 @@
+REST 란 “Representational State Transfer” 의 약자
+REST란, “웹에 존재하는 모든 자원(이미지, 동영상, DB 자원)에 고유한 URI를 부여해 활용”하는 것으로, 자원을 정의하고 자원에 대한 주소를 지정하는 방법론을 의미
+
+CRUD Operation, HTTP Method
+1. Create : POST (자원 생성)
+2. Read : GET (자원의 정보 조회)
+3. Update : PUT (자원의 정보 업데이트)
+4. Delete : DELETE (자원 삭제)

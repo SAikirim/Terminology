@@ -1,0 +1,24 @@
+* PAP(Password Authentication Protocol)
+  - 2-Way-Handshake로 동작
+  - 절차
+    0. PPP LCP Negotiation(협상) 절차를 수행 : MRU(max receive unit) 및 인증 방식 협상		// MTU(Maximum transmission unit)
+    1. id, password를 평문으로 다음 장치(ex:NAS)로 전송
+    2. 장치는 확인후 인증을 답변	// 장치 안에 계정 DB가 없으면 RADIUS라는 인증 서버로부터 확인 
+
+* CHAP(Challenge-Handshake Authentication Protocol)
+  - 3-Way-Handshake로 동작
+  - Hash(MD5) 알고리즘 사용
+  - 절차
+    0. 사용자 ID 전송	// 통신을 위한
+    1. Sequence Numbe(Seq_Num)와 임의의 값 Challenge Value(CV)를 클라이언트에게 보냄
+    2.  MD5(Seq_Num + 암호 + CV), 클라이언트는 받은 정보를 MD5 해쉬하여 장치에게 보냄
+    3. 장치는 받은 해쉬값과 자신이 가지고 있는 값으로 해쉬한 값과 비교하고, 일치하면 인증 성공 메세지를 보냄
+
+* EAP(Extensible Authentication Protocol)
+  - EAP-MD5, OTP, LEAP, PEAP, TLS 등 여러방식을 지원함
+  - EAP-MD5 : CHAP 방식과 비슷
+
+--- 
+ * 상호간의 인증을 하지 않아, 상대방(장치)가 올바른지 아닌지 알수 없음
+  - 불법 AP(Rogue AP)에 연결될 수 있음 -> 개인정보 유출
+* TLS(Transport Layer Security) 기반의 인증 방식 사용으로 문제 해결

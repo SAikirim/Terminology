@@ -1,0 +1,62 @@
+﻿■ 스택 가드(Stack Guard)/스택 쉘드(Stack Shield)
+- 버퍼 오버플로우는 정확하게 말하면 애플리케이션 개발자의 실수이다. 
+- 스택가드/스택쉴드는 BOF 공격에 대한 방어 기술 중 컴파일 테크닉이다.
+
+■ 스택 가드(SG, Stack Guard)
+- 스택 가드란, 해당 프로그램 구동시 SSP(Stack Smashing Protector)에 의해 Stack 상에 일정한 주소번지에 프로그램이 선언한 canary를 심어 두어, 스택의 변조 된경우에, canary를 체크하여 프로그램이 비정상적으로 종료 시키는 기법이다. 이러한 방법은 크래커들이 함수의 리턴시 프로그램의 흐름을 변조하는 방법을 역이용하는 것으로 아주 간단하면서도 유용한 방법이다.		// 단점: 코딩이 길어진다.
+- *canary의 종류
+1. Random canary: /dev/urandom 에 의해 생성되는 랜덤의 값
+2. Terminator canary : NULL이나 CR(0xd), LF(0xa), EOF(0xff)와 같은 값을 포함하여 canary의 값을 알더라도 페이로드를 정상적으로 작성할 수 없도록 한다.
+
+[메모리 구조]
+<--- 스택 증가 방향
+-------------------------------------------------------------------
+256bytes	4bytes	   		4bytes		4bytes
+char str[256]   stack guard(canary)   	SFP		RET
+AAAA....AAAA    AAAA         		AAAA     	(새로운주소)
+-------------------------------------------------------------------
+<--- 낮은 주소                   		  높은 주소 --->
+
+스택가드의 크기는 보통 4바이트 또는 8바이트 정도이다.
+** 스택가드의 내용을 똑같이 넣어 사용하면 해결 **
+** memory leak이 일어나는 곳을 찾아서 카나리 값을 직접 알 수 있으면 제일 좋다. **
+(물론 프로그램이 실행 할 때마다 카나리 값이 변하지 않는다는 가정이 있어야 하겠지만)
+
+
+■ 스택 쉴드(SS, Stack Shield)
+- 스택 쉴드는 함수의 리턴 주소를 복사하여 실제 리턴 주소를 참조하지 않고, 복사된 함수의 리턴주소를 사용하는 방식이다. 스택 쉴드의 경우 실제 리턴 주소와 복사된 주소는 참조되지 않으므로 리턴 주소를 변조하는 것이 불가능하다.
+- RET의 값을 어느 곳에 저장해 두었다가 프로그램이 끝날 때 ret의 값을 비교해 처음과 다르다면 비정상 종료시키는 것
+- 하지만, 스택쉴드의 경우 안전한 장소로 함수의 리턴 주소를 복사하는 과정에서 프로그램의 성능이 다소 떨어질 수 있다.	// 단점: 이것도 속도가 떨어짐
+
+
+■ NX(데이터 실행 방지), 스택 실행권한 해제 (Non-executable Stack)
+- Nx bit를 활성화 시켜 스택이나 힙영역의 실행권한을 없애서 쉘의 실행으로부터 보호하는 기법이다. 이를 우회하기 위한 방법으론 대표적인 것이 RTL공격(공유라이브러리 이용 ldd로 확인 가능하다.)이다.
+NX비트가 활성화 되어 있는 지는 다음과 같이 확인이 가능하다.
+** RTL(Return-to-Library) 공격 가능 **
+
+
+■ ASLR(랜덤 스택)
+- ASLR(Address space layout randomize)는 프로그램이 가상메모리에 mapping 될 때 그 base address의 주소를 랜덤으로 돌려서 공격을 어렵게 하는 방어기법 이다
+1. Echo 0 > /proc/sys/kernel/randomize_va_sapce (ASLR 끔)
+2. Echo 1 > /proc/sys/kernel/randomize_va_szpce (ASLR ON -> stack randomize)
+3. Echo 2 > /proc/sys/kernel/randomize_va_szpace (ASLR ON -> stack, heap, mmap randomize)
+
+** 1. Brute Force **
+특정한 때 쉘이 위치할 주소 값을 하드코딩 한 다음 계속 공격하는 것이다. 구버전 리눅스의 경우 스택의 크기가 크지 않아 가능한 공격이다. NOP를 충분히 넣어주면 빠르게 공격이 가능하다. 하지만 64bit시스템이나 최신버전에선 좀 힘들다..
+
+** 2. Jmp *esp, call *esp **
+명령어를 보자 마자 무슨 뜻인지 알 것이다. 잘 모르겠다는 사람은 본인이 전에 올린 블로그 글을 참고하길 바란다. 이 명령어를 text명령어나 공유라이브러리에서 찾는 방법은 gdb에서 [ find /h (메모리 시작주소), (메모리 끝 주소), 명령어 ] 이렇게 찾으면 된다. 혹은 msfelfscan 툴을 이용하면 된다.
+이 때 주의할 점은 RTL을 통해 공격하는 것을 막기 위해 라이브러리 마저 Random으로 돌아가는 경우이다.
+
+** 3. RET Sledding **
+RET sledding을 하게 되면 주소 값과 상관 없이 스택에 위치한 값들을 이용하기 때문에 공격이 가능하다.
+
+
+■ Ascii armor 
+- 공유라이브러리의 주소 값의 최상위 비트가 0x00이 위치해 페이로드를 구성 할 수 없도록 하는 기법인데 RET sledding이나 fake ebp로 우회 가능하다. 또는 ascii armor의 보호를 받지 않는 PLT영역의 주소 값을 이용해서 GOT를 overwrite 시켜 공격하는 방법이 있다.
+- 문자열을 사용하는 함수들은 NULL값이 나오면 중지한다. 그러므로 RTL처럼 라이브러리 함수를 사용하는 공격은 뒤에 인자를 수반 할 수 없다.
+**  RET sledding, fake ebp, PLT로 우회 가능 **
+
+
+
+출처: http://flack3r.tistory.com/entry/XFile [Be myself]

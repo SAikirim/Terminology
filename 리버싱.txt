@@ -1,0 +1,42 @@
+	인텔 문법
+
+dword - eax	[4byte]
+
+word - ax	[2byte]
+
+byte - al,ah	[1byte]
+
+
+DS	Data 영역
+SS	Stack 영역
+----------------------------------------
+
+ptr	:	포인터
+
+메모리 주소의 표기법 = [ 주소 ]
+Imm		Immediate constant	: 메모리에 저장된 데이터를 직접 보여줌
+
+
+	프로그램 시작 주소
+Image Base		: 메모리에서 PE파일이 로딩되는 부분(맵핑)을 의미한다.
+Address of entry point	: entry point의 RVA값을 가지고있다.
+RVA			: Image Base 기준으로의 offset을 의미한다
+
+	함수 호출 규약
+https://oopsys.tistory.com/165	: 공부,정보 -> 시스템 해킹
+
+호출자(Caller)와 피호출자(Callee) 간에 '함수를 호출할 때 전달되는 인자의 순서나 사용이 끝나고 나서의 스택 정리 등'에 대한 약속이라고 할 수 있다. 
+cdecl	stdcall	 fastcall
+
+-----------------------------------------------------------------------------
+	prolog 코드(인텔)
+push     ebp                 ; Save ebp
+mov      ebp, esp            ; Set stack frame pointer
+sub      esp, localbytes     ; Allocate space for locals
+push     <registers>         ; Save registers
+
+	에필로그 코드(인텔)
+pop      <registers>         ; Restore registers
+mov      esp, ebp            ; Restore stack pointer	;leave
+pop      ebp                 ; Restore ebp		;leave
+ret                          ; Return from function

@@ -1,0 +1,5 @@
+* Forward Proxy
+	- 클라이언트가 example.com에 연결하려고 하면 사용자PC(클라이언트)가 직접 연결하는게 아니라 포워드 프록시 서버가 요청을 받아서 example.com에 연결하여 그 결과를 클라이언트에 전달(forward) 함
+* Reverse Proxy
+	- 클라이언트가 example.com 웹 서비스에 데이타를 요청하면 Reverse Proxy는 이 요청을 받아서 내부 서버에서 데이타를 받은후에 이 데이타를 클라이언트에 전달함
+	- 보안의 이유로 사용

@@ -1,0 +1,183 @@
+X.500
+  - 분산 디렉토리 서비스 표준
+
+API			(Application Programming Interface, 응용 프로그램 프로그래밍 인터페이스)
+			응용 프로그램에서 사용할 수 있도록, 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 인터페이스 
+distribution		분배(네트워크 계층-확장성)
+Topology(토폴로지)	위상기하학,노드의 연결방식
+provider 		제공자, 제공 기관 ex)ISP
+VNC 			Virtual Network Computing
+URL			Uniform Resource Locator(정형화된 자원 위치기)
+DDos			Distributed Denial of Service(분산 서비스 거부)공격
+Ransom			몸값
+VLSM			Variable Length Subnet Mask(가변 길이 서브넷 마스크)
+QUIC			Quick UDP Internet Connections(Google에서 개발한 새로운 인터넷 전송 프로토콜)
+			연결 (가능성) 확인 용도
+promisc mode		난잡한, 로컬상의 모든 peckets을 잡는다.
+payload			
+
+----------------------------------------------------------------------------------
+ DTE			Date Terminal Equipment
+ DCE			Date Communicationss Equipment(Date Circuit-terminal Equipment)
+
+  MS
+NCPA			Network Connections PA
+MSTSC			MicroSoft Terminal Services Client
+
+  Layer3
+ICMP			Internet Control Messages Protocol
+ARP			주소 결정 프로토콜(Address Resolution Protocol)
+
+  UDP
+SNMP			Simple Network Management Protocol
+  
+  TCP
+SMTP			Simple Mail Trasfer Protocol(port: TCP-25)
+
+  Layer2
+CSMA/CD			Carrier Sense Mutiple Access / Collision Detection
+
+
+암호화
+* IPsec			: 3계층, 3~4계층 사이(데이터) 암호화, 헤더에 옵션을 붙임
+
+* SSL(Secure Sockets Layer)/TLS	: 5계층, 4~5계층 사이(데이터), 헤더에 옵션
+
+* S/MIME		: 암호화 프로트콜 방식, 인코딩, 디코딩 : 7계층, 데이터(어플리케이션)안에 옵션
+  Open GPG, PGP		: 7계층, 데이터(어플리케이션)안에 옵션
+			(기본적으로 UTM사이만 IPsec으로 암호화 되기 때문에, UTM과 메일 서버 사이 암호화 가능)
+
+* SPX			: 데이터 -> PDF파일로 변환 후 암호화(메일내용을 첨부파일로)
+
+* Thunderbird encryption: S/MIME, Open GPG, PGP 사용, (클라이언트와 메일서버 사이를 암호화 할 수 있음)
+
+
+인코딩/디코딩
+  주 목적: 보이는 문자로 변환
+
+
+G: government(정부)
+C: consumer(소비자)
+B: business(기업)
+
+
+NFC 
+  13.56MHz의 대역 사용
+
+
+---------------------------------------------------------------------------------------------------------
+
+TCP는 Transmission Control Protocol(전송 제어 프로토콜) Layer4
+	연결 지향성 프로토콜 - 3-way핸드쉐이킹
+	데이터 스트림 서비스 - 데이터를 세크먼트 단위로 분할/재조립
+	흐름 제어 - 슬라이딩 윈도우 - 송수신 시스템 간에 윈도우 크기만큼 세그먼트를 전송하고 Ack를 수신
+	재전송 기능 - 송신한 세그먼트에 대한 Ack를 수신 못하념, 세그먼트 재전송
+	오류 제어/정정 - 손상된 세그먼트를 송신할 경우, 수신측으로부터 Ack를 못 받기 때문에 세그먼트 재전송
+	혼잡 제어 - 혼잡 발생시 윈도우 크기를 줄여, 혼잡 회피
+	ex) HTTP, SSH, Telnrt, FTP, SMTP, POP3(110), HTTPs
+
+UDP는 User Datagram Protocol Layer4
+	비연결 지향성
+	Best Effort 서비스
+	오류 검사 - 손상된 데이터는 드랍, 재전송 보장x
+	단순한 요청/응답 서비스, 실시간 트래픽 전송서비스(음성.영상), 브로드케스트,멀티케스트
+	ex)DNS, DHCP,TFTP, SNMP,NTP
+
+IP	Layer3
+	비연결 지향성
+	Best Effort 서비스
+	로컬 환경에서 다른 롼경으로 데이터 전송 담당
+	
+ICMP 	Layer3
+	IP 프로토콜에 대한 신뢰성을 보장하기 위한 메세지 교환 프로토콜
+	ICMP Echo Request, ICMP Reply
+	'ping'명령어, 'tracert'명령어
+
+ARP	Layer3
+	목적지 IP 주소에 대한 MAC주소를 설정하는 프로토콜
+	만약, 목적지에 대한 MAC주소가 ARP테이블에 없다면, ARP브로드케스트 요청-> <-ARP유니케스트 응답
+
+
+
+
+유니케스트 IP 주소:A,B,C 클래스(0.0.0.0 ~ 223.255.255.255)
+	   MAC 주소: 00-xx-xx-xx-xx-xx
+	A Class(0~127)	 공통: 0	0.0.0.0 ~ 127.255.255.255 기본 서브넷 마스크: 255.0.0.0
+	B Class(128~191) 공통: 10 				  기본 서브넷 마스크: 255.255.0.0 		
+	C Class(192~223) 공통: 110				  기본 서브넷 마스크: 255.255.255.0
+
+멀티케스트 IP 주소: D클래스(224.0.0.0 ~ 239.255.255.255)
+	   MAC 주소: 01-00-5e-xx-xx-xx
+	D Class(224~239) 공통: 1110	224.0.0.0 ~ 239.255.255.255 서브넷 마스크 X
+
+브로드케스트 IP주소: 255.255.255.255
+	   MAC 주소: FF-FF-FF-FF-FF-FF
+	E Class(240~255) IANA예약한 주소 240.255.255.255 ~ 255.255.255.255 서브넷 마스크 X
+
+
+Layer7 어플리케이션 계층 : 사용자에게 서비스 제공
+
+Layer6 프리젠테이션 계층 : 사용자가 사용 할 수 있게 구동 담당
+
+Layer5 세션 계층 	 : 클라이언트오 서버간 논리적 연결 담당
+
+------------------------- 상위계층 : 서비스 구현 & 데이터 생성 > OS담당
+
+Layer4 트샌스트포트 계층 : TCP/UDP 프로토콜	
+
+Layer3 네트워크 계층	 : IP 프로토콜 ex)라우터 
+
+Layer2 데이터-링크 계층	 : ETH/HDLC/PPP/Frame-Relay 프로토콜  ex)스위치
+
+Layer1 물리 계층	 : 전기적인 신호 처리
+
+------------------------- 하위계층 : 데이터 전송 담당 > 전송장비, 전송 프로토콜
+
+
+Time to Live(TTL)
+Cisco IOS = 255
+Window = 128
+Linux = 64
+
+
+220.79.8.197
+
+
+서브넷 마스크		Prefix
+255.255.255.0	  	/24
+255.255.0.0		/16
+0.0.0.0			/0 
+
+사설 IP 주소 범위
+A Class	10.0.0.0 ~ 10.255.255.255	10.0.0.0/8
+B Class 172.16.0.0 ~ 172.31.255.255	172.16.0.0/12
+C Class 192.168.0.0 ~192.168.255.255	192.168.0.0/16
+
+* 설정 불가 주소 *
+ 첫번째 옥텟이 '0'인 주소
+ 첫번째 옥텟이 '127'인 주소(MS TCP Loopback interface) cmd->route print
+ 네트워크 이름
+ 서브넷 브로드케스트 주소
+
+서브넷팅 -> VLSM
+주소요약
+
+
+@0x2102	<- 기본 모드	@Ox2142 <- 패스워드 복구
+1. POST			1. POST	
+2. 부팅			2. 부팅
+3. IOS 찾음		3. IOS 찾음
+4. OS 로딩		4. OS 로딩
+5. NVRAM
+
+route 명령어
+R1(config)#ip route (아이피) (서브넷) (네스트-홈/게이트웨이)	정적 경로 설정
+
+RIP
+c-r)passive-interface f 0/0	인터페이스 FastEthernet 0/0을 닫는다.
+c)no service timestamp debug	디버그의 타임스템프 서비스를 중지
+c-r)offsret-list 0 in 3 e0/0	Ethernet0/0로 수신하는 RIP업데이트 정보의 메트릭에 홉 3을 더 추가하여 수신
+
+
+RIP				포트번호: UDP 520, 브로드캐스트 사용
+RIP				224.0.0.9 멀티캐스트 주소 사용

@@ -1,0 +1,91 @@
+PaaS vs K8s
+Monolithic vs MSA
+
+* Pod	    <┐
+    Container  ┘ 패턴
+    Label
+    Label Selector
+    Annotation(어노테이션)
+	- 의미 그대로 주석 성격의 메타데이터를 기록해 두는데 사용, 필요한 정보들을 표시해 주기 위해서 사용
+    Namespace
+    Rediness Probe
+	- 파드가 트래픽을 처리할 준비가 되어 있는지를 체크, 결과가 정상이 아니면 해당 파드는 로드밸런스에서 제외
+    Liveness Probe
+	-  컨테이너가 정상적으로 구동 중 인지를 체크, 결과가 정상이 아니면 컨테이너를 재시작
+ 
+* Controller
+    Replication Controller
+    ReplicaSet
+    DaemenSet
+    Job
+    CronTob
+    StatefulSet
+    Deployment / 전략
+    Horizontal Pod Autosacler(HPA)
+	- 지정한 메트릭을 컨트롤러가 체크하여 부하에 따라 필요한 포드의 레플리카수가 되로록 자동 조정
+
+* Service
+    discovery 
+	- 
+    clusterIP
+    nodeport
+    loadbalaner
+    externalname
+	- 외부 서비스를 쿠버네티스 내부에서 호출하고자 할 때 사용
+	- 일종의 프록시와 같은 역할로 포워딩 해줌
+    headless
+	- ClusterIP를 None으로 설정한 서비스
+
+* Ingress
+	- loadbalaner는 단일 서비스만 제공가능함, 여러 서비스를 제공하기 위해 사용
+	- 클러스터 외부에서 내부로 접근하는 요청들을 어떻게 처리할지 정의해둔 규칙들의 모음
+
+* Volume
+    emptydir
+    hostpath
+    pv
+    pvc
+    storageclass
+
+* K-V
+    configmap
+    secret
+
+* Resource
+    limit
+	- 컨테이너가 생성된 후, 리소스가 더 필요할 시의 최대 리소스 양
+    request
+	-  컨테이너가 생성될때 요청하는 리소스 양   
+    limitrange
+	- 오브젝트를 네임스페이스에서 지정하고 그 안에서 포드가 사용할 수 있는 리소스(cpu, 메모리)의 양을 제한
+	- 총량이 아님
+    resource quota
+	- 총량 제한 기능
+	- 이미 움직이고 있는 포드와 작성 요청한 포드의 'Requests' 값을 더하여 ResourceQuota에 정의한 상한을 넘지 않았는지 확인
+
+* Pod Scheduler
+    nodename
+    node selector
+    affinity / anti-affinity
+	- affinity는 Pod를 특정 Node에 배포되도록 하는 정책
+	  = Node affinity  :  nodeselector와 비슷
+ 	  = Inter-Pod affinity : 기존에 배포된 Pod를 기준으로 배포
+    taint / Tolerations(테인트/톨러레이션)
+	- taint를 설정한 노드에는 포드들이 스케줄링이 되지 않음
+	- toleration을 이용한 특정 포드들만 실행하게 하고 다른 포드들은 들어오지 못하게 하는 역할 
+    cordon / drain
+	- cordon : 지정된 노드에 더이상 포드들이 스케쥴링되서 실행되지 않도록 함
+    	- drain : 노드 관리를 위해서 지정된 노드에 있는 포드들을 다른곳으로 이동시키는 명령
+
+* RBAC
+    serviceaccount
+    role
+    clusterrole
+    rolebinding
+    clusterrolebinding
+    kubeconfig
+
+* Addon
+    Helm 패키지
+    로깅
+    모니터링
