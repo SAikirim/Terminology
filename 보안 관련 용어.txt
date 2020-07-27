@@ -1,38 +1,38 @@
-º¸¾È °ü·Ã ¿ë¾î
+ë³´ì•ˆ ê´€ë ¨ ìš©ì–´
 
-¸¶½ºÄ¿·¹ÀÌµå(Masquerade)	³»ºÎ »ç¼³ IPµéÀÌ ¿ÜºÎ ÀÎÅÍ³İÀÌ ¿¬°á °¡´ÉÇÏµµ·Ï ÇØÁÖ´Â ±â´É
+ë§ˆìŠ¤ì»¤ë ˆì´ë“œ(Masquerade)	ë‚´ë¶€ ì‚¬ì„¤ IPë“¤ì´ ì™¸ë¶€ ì¸í„°ë„·ì´ ì—°ê²° ê°€ëŠ¥í•˜ë„ë¡ í•´ì£¼ëŠ” ê¸°ëŠ¥
 
-SNAT(Sourece NAT)		³»ºÎ ½Ã¼³ IP¿¡¼­ ¿ÜºÎ·Î ³ª°¥ ¶§ °øÀÎ IP·Î º¯È¯= ¸¶½ºÄ¿·¹ÀÌµå¿Í ºñ½Á
-DNAT(Destination NAT)		¿ÜºÎ¿¡¼­ ¹æÈ­º®(¿ÜºÎIP)À¸·Î ¿äÃ»µÇ´Â ÁÖ¼Ò·Î ³»ºÎ»ç¼³ IP·Î º¯È¯
+SNAT(Sourece NAT)		ë‚´ë¶€ ì‹œì„¤ IPì—ì„œ ì™¸ë¶€ë¡œ ë‚˜ê°ˆ ë•Œ ê³µì¸ IPë¡œ ë³€í™˜= ë§ˆìŠ¤ì»¤ë ˆì´ë“œì™€ ë¹„ìŠ·
+DNAT(Destination NAT)		ì™¸ë¶€ì—ì„œ ë°©í™”ë²½(ì™¸ë¶€IP)ìœ¼ë¡œ ìš”ì²­ë˜ëŠ” ì£¼ì†Œë¡œ ë‚´ë¶€ì‚¬ì„¤ IPë¡œ ë³€í™˜
 
 FTP
-  Active Mode(Non-passive Mode)	21¹ø Æ÷Æ®·Î Á¢¼Ó, 20¹ø Æ÷Æ®·Î µ¥ÀÌÅÍ Àü¼Û
-  Passive Mode			21¹ø Æ÷Æ® Á¢¼Ó, 1024¹ø ÀÌ»ó Æ÷Æ®·Î µ¥ÀÌÅÍ Àü¼Û(ls´Â ¸í·É¾î-21,Ãâ·Â-µ¥ÀÌÅÍ)
+  Active Mode(Non-passive Mode)	21ë²ˆ í¬íŠ¸ë¡œ ì ‘ì†, 20ë²ˆ í¬íŠ¸ë¡œ ë°ì´í„° ì „ì†¡
+  Passive Mode			21ë²ˆ í¬íŠ¸ ì ‘ì†, 1024ë²ˆ ì´ìƒ í¬íŠ¸ë¡œ ë°ì´í„° ì „ì†¡(lsëŠ” ëª…ë ¹ì–´-21,ì¶œë ¥-ë°ì´í„°)
 
-SNMP				Simple Network Management Protocl(³×Æ®¿öÅ© °ü¸® ÇÁ·ÎÅäÄİ
+SNMP				Simple Network Management Protocl(ë„¤íŠ¸ì›Œí¬ ê´€ë¦¬ í”„ë¡œí† ì½œ
 
------Àåºñ--------------------------------------------------------------------------------------------
-¹æÈ­º®(Firewall)		ÆĞÅ¶ ÇÊÅÍ¸µ ±â´É(Packet Filtering)
+-----ì¥ë¹„--------------------------------------------------------------------------------------------
+ë°©í™”ë²½(Firewall)		íŒ¨í‚· í•„í„°ë§ ê¸°ëŠ¥(Packet Filtering)
 				NAT(Network Address Translation) /PAT(Port Adrress Translation)
 
 IDS				Intrusion Detection System
 				  HIDS(Host-Based Intrusion Detection System)
 				  NIDS(Network-Based Intrusion Detecrion System)
-IPS				Intrusion Preventing System(Ä§ÀÔ ¹æÁö ½Ã½ºÅÛ)
+IPS				Intrusion Preventing System(ì¹¨ì… ë°©ì§€ ì‹œìŠ¤í…œ)
 
-DRM Solution			Digiral Right Management Solution(µğÁöÅĞ ÀúÀÛ±Ç °ü¸® ¼Ö·ç¼Ç:ÇØ°á)
-DLP Solution			Data Loss Prevention Solurion(µ¥ÀÌÅÍ ¼Õ½Ç ¹æÁö ¼Ö·ç¼Ç)
-ESM				Enterprise Security Management(±â¾÷ º¸¾È °ü¸®)
-NMS				Network Management System // ´Ü¼ø ¸ğ´ÏÅÍ¸µ Àåºñ
+DRM Solution			Digiral Right Management Solution(ë””ì§€í„¸ ì €ì‘ê¶Œ ê´€ë¦¬ ì†”ë£¨ì…˜:í•´ê²°)
+DLP Solution			Data Loss Prevention Solurion(ë°ì´í„° ì†ì‹¤ ë°©ì§€ ì†”ë£¨ì…˜)
+ESM				Enterprise Security Management(ê¸°ì—… ë³´ì•ˆ ê´€ë¦¬)
+NMS				Network Management System // ë‹¨ìˆœ ëª¨ë‹ˆí„°ë§ ì¥ë¹„
 
 ---------------------------------------------------------------------
-	¸®´ª½º static = PERM
+	ë¦¬ëˆ…ìŠ¤ static = PERM
 
-CVE(Common Vulnerabilities and Exposure)	°ø°³ÀûÀ¸·Î ¾Ë·ÁÁø ¼ÒÇÁÆ®¿ş¾îÀÇ º¸¾ÈÃë¾àÁ¡À» °¡¸®Å°´Â °íÀ¯ Ç¥±â¸¦ ¶æÇÑ´Ù.
-						ÀÌ´Â Ãë¾àÁ¡À» °¡Áø ´Ù¸¥ µµ±¸, ÀúÀå¼Ò ¹× ¼­ºñ½º °£¿¡ µ¥ÀÌÅÍ¸¦ °øÀ¯ÇÏ´Â °ÍÀÌ ¸ñÇ¥´Ù.
+CVE(Common Vulnerabilities and Exposure)	ê³µê°œì ìœ¼ë¡œ ì•Œë ¤ì§„ ì†Œí”„íŠ¸ì›¨ì–´ì˜ ë³´ì•ˆì·¨ì•½ì ì„ ê°€ë¦¬í‚¤ëŠ” ê³ ìœ  í‘œê¸°ë¥¼ ëœ»í•œë‹¤.
+						ì´ëŠ” ì·¨ì•½ì ì„ ê°€ì§„ ë‹¤ë¥¸ ë„êµ¬, ì €ì¥ì†Œ ë° ì„œë¹„ìŠ¤ ê°„ì— ë°ì´í„°ë¥¼ ê³µìœ í•˜ëŠ” ê²ƒì´ ëª©í‘œë‹¤.
 
 
------ÇØÄ¿,ÇØÅ·--------------------------------------------------------------------------------------------
-APT(Advanced Persistent Therat)	Áö´ÉÇü Áö¼Ó °ø°İ/À§Çù
-				ÁöÁ¤ ´ë»óÀ» ¸ñÇ¥È£ ÇÏ¿© ´Ù¾çÇÑ ÇØÅ· ±â¼úÀ» ÀÌ¿ëÇØ Àº¹ĞÇÏ°Ô Áö¼ÓÀûÀ¸·Î °ø°İ
+-----í•´ì»¤,í•´í‚¹--------------------------------------------------------------------------------------------
+APT(Advanced Persistent Therat)	ì§€ëŠ¥í˜• ì§€ì† ê³µê²©/ìœ„í˜‘
+				ì§€ì • ëŒ€ìƒì„ ëª©í‘œí˜¸ í•˜ì—¬ ë‹¤ì–‘í•œ í•´í‚¹ ê¸°ìˆ ì„ ì´ìš©í•´ ì€ë°€í•˜ê²Œ ì§€ì†ì ìœ¼ë¡œ ê³µê²©
 
