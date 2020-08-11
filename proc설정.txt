@@ -1,0 +1,14 @@
+* Syn_Cookie 설정
+  - cat /proc/sys/net/ipv4/tcp_syncookies	# 1이면 syn쿠기 사용
+
+* Syn_Cookie
+  1. SYN 패킷을 받으면, 간단한 인증 정보가 담긴 Syn_Cookie를 시퀀스 값에 넣고 세션을 닫음
+    - 기존의 ACK를 받기위해 대기함
+  2. 클라이언트가 Syn_Cookie가 포함된 값으로 ACK를 보내면 서버는 세션을 다시 열고 통신을 시작
+
+
+* 백로그큐 크기 키우기
+  -  cat /proc/sys/net/ipv4/tcp_max_syn_backlog
+
+* IP forward 설정
+  - cat /proc/sys/net/ipv4/ip_forward		# 1로하면 포워드 설정
