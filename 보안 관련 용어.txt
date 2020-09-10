@@ -1,4 +1,9 @@
-보안 관련 용어
+﻿보안 관련 용어
+
+* RPO(Recovery Point Objective)
+  - 목표 복구 시점
+* RTO(Recovery Time Objective)
+  - 목표 복구 시간
 
 마스커레이드(Masquerade)	내부 사설 IP들이 외부 인터넷이 연결 가능하도록 해주는 기능
 
